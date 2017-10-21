@@ -34,6 +34,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.yzhk.mobilesafe.R;
 import com.yzhk.mobilesafe.db.domain.AppInfoBean;
 import com.yzhk.mobilesafe.engine.AppInfoManager;
