@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff303030"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#ff222222"
+        android:gravity="center"
+        android:text="归属地查询"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_phonenumb"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/shape_textview_frame"
+        android:hint="请输入号码"
+        android:gravity="center"
+        android:inputType="number|phone"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/tv_showplace"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="5dp"
+         android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/shape_textview_frame"
+        android:gravity="center"
+        android:text="归属地"
+        android:textColor="#99ffffff" />
+
+    <Button
+        android:id="@+id/bt_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="#ff303030"
+        android:text="查询"
+        android:textColor="#ff7bc6bf" />
+
+</LinearLayout>

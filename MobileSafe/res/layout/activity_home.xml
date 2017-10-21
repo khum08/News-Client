@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="功能列表"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:background="#99ff00"
+        android:textSize="@dimen/textsize_title"/>
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:text="人生好比海上的波浪，有时起有时落。莫愁前路无知己，天下谁人不识君"
+        android:textSize="@dimen/textsize_18"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"/>
+    <GridView 
+        android:id="@+id/gv_function"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="15dp"
+        android:numColumns="3"
+        android:verticalSpacing="20dp"></GridView>
+
+</LinearLayout>
