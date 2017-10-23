@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 
 import com.yzhk.mobilesafe.R;
 import com.yzhk.mobilesafe.service.AddressSearchService;
+import com.yzhk.mobilesafe.service.AppLockService;
 import com.yzhk.mobilesafe.service.BlackNumbService;
 import com.yzhk.mobilesafe.utils.ServiceUtils;
 import com.yzhk.mobilesafe.view.SettingChooseView;
@@ -24,6 +25,7 @@ public class SettingActivity extends Activity {
 	private SettingChooseView scv_addresscolor;
 	private SettingChooseView scv_address_drag;
 	private SettingItemView siv_blacknumber;
+	private SettingItemView siv_applock;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,31 @@ public class SettingActivity extends Activity {
 		initAddressColor();
 		initAddressDrag();
 		initBlackNumb();
+		initAppLock();
+	}
+
+	private void initAppLock() {
+		siv_applock = (SettingItemView) findViewById(R.id.siv_applock);
+		
+		boolean serviceRunning = ServiceUtils.isServiceRunning(this, "com.yzhk.mobilesafe.service.AppLockService");
+		if(serviceRunning){
+			siv_applock.setCheck(true);
+		}else{
+			siv_applock.setCheck(false);
+		}
+		siv_applock.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(siv_applock.isChecked()){
+					siv_applock.setCheck(false);
+					stopService(new Intent(SettingActivity.this, AppLockService.class));
+				}else{
+					siv_applock.setCheck(true);
+					startService(new Intent(SettingActivity.this, AppLockService.class));
+				}
+			}
+		});
 	}
 
 	private void initBlackNumb() {

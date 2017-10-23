@@ -95,6 +95,7 @@ public class SplashActivity extends Activity {
 		sp = getSharedPreferences("config", MODE_PRIVATE);
 		copyDb("address.db");
 		copyDb("commonnum.db");
+		copyDb("antivirus.db");
 		
 		
 		boolean autoUpdate = sp.getBoolean("auto_update", true);

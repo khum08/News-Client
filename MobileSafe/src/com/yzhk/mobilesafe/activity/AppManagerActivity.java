@@ -34,7 +34,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.yzhk.mobilesafe.R;
 import com.yzhk.mobilesafe.db.domain.AppInfoBean;
 import com.yzhk.mobilesafe.engine.AppInfoManager;
@@ -141,7 +140,7 @@ public class AppManagerActivity extends Activity implements OnClickListener{
 					mViewHolder = (ViewHolder) convertView.getTag();
 				}
 				
-				mViewHolder.tv_appname.setText(getItem(position).getPackageName());
+				mViewHolder.tv_appname.setText(getItem(position).getName());
 				if(getItem(position).isSdApp()){
 					mViewHolder.tv_appgrade.setText("SD卡应用");
 				}else{
@@ -316,8 +315,7 @@ public class AppManagerActivity extends Activity implements OnClickListener{
 		//卸载应用
 		case R.id.tv_app_unintall:
 			try {
-				Intent intent = new Intent("android.intent.action.DELETE");
-				intent.addCategory("android.intent.category.DELETE");
+				Intent intent = new Intent(Intent.ACTION_DELETE);
 				intent.setData(Uri.parse("package:"+infoBean.getPackageName()));
 				startActivity(intent);
 			} catch (Exception e) {

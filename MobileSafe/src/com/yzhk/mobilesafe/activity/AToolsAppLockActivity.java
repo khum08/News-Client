@@ -9,6 +9,9 @@ import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -42,7 +45,6 @@ public class AToolsAppLockActivity extends Activity {
 	protected MyAdapter mLockedAdapter;
 	
 	private Handler mHandler = new Handler(){
-		
 
 		public void handleMessage(android.os.Message msg) {
 			
@@ -102,11 +104,6 @@ public class AToolsAppLockActivity extends Activity {
 					}
 				}
 				
-				int size = mUnLockedAppList.size();
-				int size2 = mLockedAppList.size();
-				tv_applock_unlockapp_count.setText("未加锁应用("+size+")");
-				tv_applock_lockapp_count.setText("已加锁应用("+size2+")");
-				
 				mHandler.sendEmptyMessage(0);
 				
 			};
@@ -132,8 +129,10 @@ public class AToolsAppLockActivity extends Activity {
 			int count;
 			if(flag){
 				count = mUnLockedAppList.size();
+				tv_applock_unlockapp_count.setText("未加锁应用("+count+")");
 			}else{
 				count = mLockedAppList.size();
+				tv_applock_lockapp_count.setText("已加锁应用("+count+")");
 			}
 			return count;
 		}
@@ -155,7 +154,7 @@ public class AToolsAppLockActivity extends Activity {
 		}
 
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView, ViewGroup parent) {
 			ViewHolder mViewHolder = null;
 			if(convertView==null){
 				mViewHolder = new ViewHolder();
@@ -169,12 +168,64 @@ public class AToolsAppLockActivity extends Activity {
 				mViewHolder = (ViewHolder) convertView.getTag();
 			}
 			mViewHolder.iv_applock.setImageDrawable(getItem(position).getIcon());
-			mViewHolder.tv_applock_package.setText(getItem(position).getPackageName());
+			mViewHolder.tv_applock_package.setText(getItem(position).getName());
 			if(flag){
 				mViewHolder.tv_applock_lock.setBackgroundResource(R.drawable.unlock);
 			}else{
 				mViewHolder.tv_applock_lock.setBackgroundResource(R.drawable.lock);
 			}
+			
+			
+			//设置条目点击侦听和动画
+			final View view = convertView;
+			final AppInfoBean infoBean = getItem(position);
+			final TranslateAnimation animation = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0,
+					Animation.RELATIVE_TO_SELF, 1, 
+					Animation.RELATIVE_TO_SELF, 0, 
+					Animation.RELATIVE_TO_SELF, 0);
+			animation.setDuration(500);
+			
+			mViewHolder.tv_applock_lock.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					
+					view.startAnimation(animation);
+					animation.setAnimationListener(new AnimationListener() {
+						@Override
+						public void onAnimationStart(Animation arg0) {
+							
+						}
+						
+						@Override
+						public void onAnimationRepeat(Animation arg0) {
+							
+						}
+						
+						@Override
+						public void onAnimationEnd(Animation arg0) {
+							if(flag){
+								//未加锁
+								mLockedAppList.add(infoBean);
+								mUnLockedAppList.remove(infoBean);
+								dao.insert(infoBean.getPackageName());
+							}else{
+								mUnLockedAppList.add(infoBean);
+								mLockedAppList.remove(infoBean);
+								dao.delete(infoBean.getPackageName());
+							}
+							if(mUnlockAdapter!=null){
+								mUnlockAdapter.notifyDataSetChanged();
+							}
+							if(mLockedAdapter!=null){
+								mLockedAdapter.notifyDataSetChanged();
+							}
+							
+						}
+					});
+					
+				}
+			});
 			
 			return convertView;
 		}

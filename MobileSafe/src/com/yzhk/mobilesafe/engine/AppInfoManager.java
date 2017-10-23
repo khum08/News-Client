@@ -23,7 +23,7 @@ public class AppInfoManager {
 			infoBean.setPackageName(packageInfo.packageName);
 			
 			ApplicationInfo applicationInfo = packageInfo.applicationInfo;
-			infoBean.setPackageName(applicationInfo.loadLabel(pm).toString());
+			infoBean.setName(applicationInfo.loadLabel(pm).toString());
 			infoBean.setIcon(applicationInfo.loadIcon(pm));
 			
 			if((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == ApplicationInfo.FLAG_SYSTEM){

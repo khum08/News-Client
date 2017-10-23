@@ -5,12 +5,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
 import android.app.ActivityManager.RunningAppProcessInfo;
+import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -85,21 +87,19 @@ public class ProcessInfoPro {
 	 * @param ctx
 	 * @return 应用集合
 	 */
+	@SuppressWarnings("deprecation")
 	public static List<ProcessInfo> getProcessInfo(Context ctx){
 		ActivityManager am = (ActivityManager)ctx.getSystemService(Context.ACTIVITY_SERVICE);
 		PackageManager pm = ctx.getPackageManager();
 		List<ProcessInfo> list = new ArrayList<ProcessInfo>();
 		
-		List<RunningAppProcessInfo> processesList = am.getRunningAppProcesses();
-		for (RunningAppProcessInfo runningAppProcessInfo : processesList) {
+		List<RunningTaskInfo> runningTasks = am.getRunningTasks(300);
+		for (RunningTaskInfo runningTaskInfo : runningTasks) {
 			ProcessInfo info = new ProcessInfo();
-			info.setProcessPackage(runningAppProcessInfo.processName);//1
-			
-			android.os.Debug.MemoryInfo memoryUsed= am.getProcessMemoryInfo(new int[]{ runningAppProcessInfo.pid })[0];
-			info.setMemoryUsed(memoryUsed.getTotalPrivateDirty()*1024);//2
-			
+			String pkgName = runningTaskInfo.baseActivity.getPackageName();
+			info.setProcessPackage(pkgName);
 			try {
-				ApplicationInfo applicationInfo = pm.getApplicationInfo(runningAppProcessInfo.processName, 0);
+				ApplicationInfo applicationInfo = pm.getApplicationInfo(pkgName, 0);
 				info.setIcon(applicationInfo.loadIcon(pm));//3
 				info.setProcessName(applicationInfo.loadLabel(pm).toString());//5
 				if((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) !=0){
@@ -107,16 +107,46 @@ public class ProcessInfoPro {
 				}else{
 					info.setSystemProcess(false);
 				}
-				
 			} catch (NameNotFoundException e) {
+				e.printStackTrace();
 				e.printStackTrace();
 				Drawable drawable = ctx.getResources().getDrawable(R.drawable.ic_launcher);
 				info.setIcon(drawable);
-				info.setProcessName(runningAppProcessInfo.processName);
 				info.setSystemProcess(true);
 			}
 			list.add(info);
 		}
+		
+		
+//		List<RunningAppProcessInfo> processesList = am.getRunningAppProcesses();
+//		for (RunningAppProcessInfo runningAppProcessInfo : processesList) {
+//			ProcessInfo info = new ProcessInfo();
+//	    
+//			info.setProcessPackage(runningAppProcessInfo.processName);//1
+//			
+//			android.os.Debug.MemoryInfo memoryUsed= am.getProcessMemoryInfo(new int[]{ runningAppProcessInfo.pid })[0];
+//			info.setMemoryUsed(memoryUsed.getTotalPrivateDirty()*1024);//2
+//			
+//			try {
+//				ApplicationInfo applicationInfo = pm.getApplicationInfo(runningAppProcessInfo.processName, 0);
+//				info.setIcon(applicationInfo.loadIcon(pm));//3
+//				info.setProcessName(applicationInfo.loadLabel(pm).toString());//5
+//				if((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) !=0){
+//					info.setSystemProcess(true);//4
+//				}else{
+//					info.setSystemProcess(false);
+//				}
+//				
+//			} catch (NameNotFoundException e) {
+//				e.printStackTrace();
+//				Drawable drawable = ctx.getResources().getDrawable(R.drawable.ic_launcher);
+//				info.setIcon(drawable);
+//				info.setProcessName(runningAppProcessInfo.processName);
+//				info.setProcessPackage(runningAppProcessInfo.processName);
+//				info.setSystemProcess(true);
+//			}
+//			list.add(info);
+//		}
 		return list;
 	}
 	

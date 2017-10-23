@@ -42,6 +42,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
+    <com.yzhk.mobilesafe.view.SettingItemView
+        android:id="@+id/siv_applock"
+        tools:title="程序锁"
+        tools:desc_on="开启"
+        tools:desc_off="关闭"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
     
 
 </LinearLayout>

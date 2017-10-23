@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 
 import com.yzhk.mobilesafe.db.AppLockOpenHelper;
 
@@ -14,10 +15,12 @@ public class AppLockedDao {
 
 	private static AppLockedDao dao = null;
 	private AppLockOpenHelper openHelper;
+	private Context context;
 
 
 	private AppLockedDao(Context context){
 		openHelper = new AppLockOpenHelper(context);
+		this.context = context;
 	}
 	
 	public static AppLockedDao getInstance(Context context){
@@ -34,6 +37,7 @@ public class AppLockedDao {
 		values.put("packagename", packageName);
 		db.insert("applocked", null, values);
 		
+		context.getContentResolver().notifyChange(Uri.parse("content://applock/change"), null);
 		db.close();
 	}
 	
@@ -41,6 +45,7 @@ public class AppLockedDao {
 		SQLiteDatabase db = openHelper.getWritableDatabase();
 		
 		db.delete("applocked", "packagename=?", new String[]{packageName});
+		context.getContentResolver().notifyChange(Uri.parse("content://applock/change"), null);
 		db.close();
 	}
 	

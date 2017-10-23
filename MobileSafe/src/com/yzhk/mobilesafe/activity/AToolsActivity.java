@@ -54,6 +54,7 @@ public class AToolsActivity extends Activity {
 		
 	}
 
+	//初始化常用号码
 	private void initCommomNum() {
 		TextView tv_atool_commonnum = (TextView) findViewById(R.id.tv_atool_commonnum);
 		tv_atool_commonnum.setOnClickListener(new OnClickListener() {
@@ -219,16 +220,12 @@ public class AToolsActivity extends Activity {
 
 				}
 			}
-
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-
 			}
-
 			@Override
 			public void afterTextChanged(Editable s) {
-
 			}
 		});
 

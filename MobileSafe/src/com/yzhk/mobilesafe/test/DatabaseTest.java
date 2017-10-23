@@ -2,8 +2,11 @@ package com.yzhk.mobilesafe.test;
 
 import java.util.Random;
 
+import com.yzhk.mobilesafe.activity.AppStopActivity;
 import com.yzhk.mobilesafe.db.dao.BlackNumbDao;
 
+import android.content.Intent;
+import android.sax.StartElementListener;
 import android.test.AndroidTestCase;
 
 public class DatabaseTest extends AndroidTestCase {
@@ -19,6 +22,14 @@ public class DatabaseTest extends AndroidTestCase {
 			}
 		}
 		
+	}
+	
+	public void enterlock(){
+		Intent intent = new Intent();
+		intent.setClass(getContext(), AppStopActivity.class);
+		intent.putExtra("pkgName", getContext().getPackageName());
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		getContext().startActivity(intent);
 	}
 	
 }
