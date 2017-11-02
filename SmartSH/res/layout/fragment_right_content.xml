@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <com.yzhk.smartsh.view.NoScrollViewPager
+        android:id="@+id/vp_right_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+	<RadioGroup 
+	    android:id="@+id/rg_main_bottom"
+	    android:layout_width="match_parent"
+	    android:layout_height="60dp"
+	    android:layout_alignParentBottom="true"
+	    android:background="@drawable/bottom_tab_bg"
+	    android:orientation="horizontal"
+	    android:gravity="center"
+	    >
+	    <RadioButton
+	       style="@style/Main_bottom_tab"
+	        android:id="@+id/rb_home"
+	        android:text="首页"
+	        android:checked="true"
+	        android:drawableTop="@drawable/selector_bottom_home"
+	        />
+	    <RadioButton
+	       style="@style/Main_bottom_tab"
+	        android:id="@+id/rb_news"
+	        android:text="新闻"
+	        android:drawableTop="@drawable/selector_bottom_news"
+	        />
+	    <RadioButton
+	       style="@style/Main_bottom_tab"
+	        android:id="@+id/rb_service"
+	        android:text="服务"
+	        android:drawableTop="@drawable/selector_bottom_service"
+	        />
+	    <RadioButton
+	       style="@style/Main_bottom_tab"
+	        android:id="@+id/rb_gov"
+	        android:text="政务"
+	        android:drawableTop="@drawable/selector_bottom_gov"
+	        />
+	    <RadioButton
+	       style="@style/Main_bottom_tab"
+	        android:id="@+id/rb_setting"
+	        android:text="设置"
+	        android:drawableTop="@drawable/selector_bottom_setting"
+	        />
+	    
+	</RadioGroup>
+</LinearLayout>

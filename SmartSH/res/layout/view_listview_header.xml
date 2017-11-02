@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp" >
+
+        <com.yzhk.smartsh.view.TopNewsViewPager
+            android:id="@+id/vp_news_detail_tab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom" >
+
+            <TextView
+                android:id="@+id/tv_newstab_imagename"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#6000"
+                android:padding="8dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_tiny" />
+
+            <com.viewpagerindicator.CirclePageIndicator
+                android:id="@+id/indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="#0000"
+                android:padding="10dip"
+                app:fillColor="#f00"
+                app:pageColor="#88cccccc"
+                app:radius="3dp" />
+        </RelativeLayout>
+    </FrameLayout>
+
+</LinearLayout>
