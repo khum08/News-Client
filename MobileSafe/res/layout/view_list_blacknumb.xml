@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <TextView android:id="@+id/tv_black_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="1234556"
+        android:textColor="#ef00"/>
+    <TextView 
+        android:id="@+id/tv_black_mode"
+        android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/tv_black_phone"
+	    android:layout_marginLeft="5dp"
+	    android:textSize="16sp"
+	    android:text="短信"
+	    android:textColor="#a000"/>
+    <ImageView 
+        android:id="@+id/iv_black_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_delete"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        />
+
+</RelativeLayout>

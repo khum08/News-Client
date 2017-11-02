@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:orientation="vertical" >
+    
+	<TextView 
+	    android:id="@+id/tv_contactName"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:textSize="20sp"
+	    android:textColor="#ef00"/>
+	<TextView 
+	    android:id="@+id/tv_contactPhone"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="5dp"
+	    android:textSize="16sp"
+	    android:textColor="#a000"/>
+</LinearLayout>
