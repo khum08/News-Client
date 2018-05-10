@@ -1,2 +1,3 @@
-# Android1
-项目练习
+# NewsClient
+
+网上视频项目——新闻客户端
